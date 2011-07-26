@@ -1,3 +1,10 @@
+# aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias la='ls -la'
+
+# bash colors
+
 export CLICOLOR=1
 export LSCOLORS=ExGxxxxxbxxxxxxxxxxxxx
 
