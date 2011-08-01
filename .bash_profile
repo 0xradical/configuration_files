@@ -12,6 +12,12 @@ export LSCOLORS=ExGxxxxxbxxxxxxxxxxxxx
 
 export PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] "
 
+# git stuff
+
+if [[ -s "$HOME/.git-completion.bash" ]]; then
+    source "$HOME/.git-completion.bash"
+fi
+
 # rvm stuff
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
