@@ -2,6 +2,7 @@
 alias ..='cd ..'
 alias ...='cd ../..'
 alias la='ls -la'
+alias grep='grep --color=always'
 
 # bash colors
 
