@@ -33,3 +33,7 @@ IRB.conf[:PROMPT][:CUSTOM] = {
 }
 
 IRB.conf[:PROMPT_MODE] = :CUSTOM
+
+if defined?(Rails) and Rails.version >= '3'
+  include Rails.application.routes.url_helpers
+end
