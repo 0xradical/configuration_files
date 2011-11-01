@@ -31,7 +31,3 @@ export EDITOR=mate
 ##
 # Your previous /Users/thiagobrandam/.bash_profile file was backed up as /Users/thiagobrandam/.bash_profile.macports-saved_2011-07-11_at_15:11:22
 ##
-
-# MacPorts Installer addition on 2011-07-11_at_15:11:22: adding an appropriate PATH variable for use with MacPorts.
-export PATH=$PATH:/opt/local/bin:/opt/local/sbin
-# Finished adapting your PATH environment variable for use with MacPorts.
