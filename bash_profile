@@ -33,5 +33,5 @@ export EDITOR=mate
 ##
 
 # MacPorts Installer addition on 2011-07-11_at_15:11:22: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=$PATH:/opt/local/bin:/opt/local/sbin
 # Finished adapting your PATH environment variable for use with MacPorts.
