@@ -6,32 +6,6 @@ begin
   require 'awesome_print'
   Pry.config.print = proc { |output, value| output.puts value.ai }
 
-
-  module AwesomePrint
-    module TimeClasses
-
-      def self.included(base)
-        base.send :alias_method, :cast_without_time_classes, :cast
-        base.send :alias_method, :cast, :cast_with_time_classes
-      end
-
-      def cast_with_time_classes(object,type)
-        cast = cast_without_time_classes(object,type)
-        if object.is_a?(::Date) or object.is_a?(::DateTime)
-          cast = :date
-        end
-        cast
-      end
-
-      def awesome_date(object)
-        colorize(object.inspect, :time)
-      end
-
-    end
-  end
-
-  AwesomePrint::Formatter.send(:include,AwesomePrint::TimeClasses)
-
 rescue LoadError => err
   puts "no awesome_print :("
 end
