@@ -23,6 +23,15 @@ rescue LoadError
   nil
 end
 
+def bm(repetitions=100,&block)
+  return unless block_given?
+  require 'benchmark'
+
+  Benchmark.bmbm do |b|
+    b.report { repetitions.times(&block) }
+  end
+end
+
 IRB.conf[:PROMPT][:CUSTOM] = {
   :RETURN      => "=> %s\n",
   :PROMPT_I    => "%03n:%i> ",
