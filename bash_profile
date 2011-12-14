@@ -30,9 +30,45 @@ export PATH=/usr/local/mysql/bin:$PATH
 export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:/usr/local/mysql/lib/"
 export MYSQL_HISTFILE=/dev/null
 
+# history stuff
+export HISTSIZE=1000
+export HISTTIMEFORMAT="| %d/%m/%Y %T | " # 319  | 2010-06-02 09:02PM | reload
+export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND" # Save and reload the history after each command finishes
+export HISTCONTROL=erasedups # ignore repeat commands
+export HISTIGNORE="&:cl:x" # ignore specific commands
+
+
 # generic stuff
 export EDITOR=mate
 export PERL_UNICODE=AS #This makes all Perl scripts decode @ARGV as UTF‑8 strings, and sets the encoding of all three of stdin, stdout, and stderr to UTF‑8. Both these are global effects, not lexical ones.
-##
-# Your previous /Users/thiagobrandam/.bash_profile file was backed up as /Users/thiagobrandam/.bash_profile.macports-saved_2011-07-11_at_15:11:22
-##
+unset MAILCHECK #do not check for mails in bash
+
+function reload {
+  source "$HOME/.bash_profile"
+}
+
+function rails {
+  if [ -e Gemfile ]; then
+    bundle exec rails $@
+  else
+    rails_executable=`which rails`
+    if [ -n "$rails_executable" ]; then
+      $rails_executable $@
+    else
+      echo "-bash: rails: command not found"
+    fi
+  fi
+}
+
+function rake {
+  if [ -e Gemfile ]; then
+    bundle exec rake $@
+  else
+    rake_executable=`which rake`
+    if [ -n "$rake_executable" ]; then
+      $rake_executable $@
+    else
+      echo "-bash: rake: command not found"
+    fi
+  fi
+}
