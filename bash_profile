@@ -90,7 +90,7 @@ function deploy {
       return 1
     fi
   else
-    echo '-bash: deploy: No repository ""available'
+    echo '-bash: deploy: No repository available'
     return 1
   fi
 }
