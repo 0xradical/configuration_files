@@ -3,6 +3,11 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias la='ls -la'
 alias grep='grep --color=always'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+
 
 # bash colors
 
@@ -70,5 +75,22 @@ function rake {
     else
       echo "-bash: rake: command not found"
     fi
+  fi
+}
+
+function deploy {
+  if [ -e .git/config ]; then
+    ey_executable=`which ey`
+    if [ -n "$ey_executable" ]; then
+      current_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+      current_app=$(basename $(pwd))
+      ey deploy --app="$current_app" --ref="$current_branch"
+    else
+      echo '-bash: deploy: Gem "engineyard" is not installed'
+      return 1
+    fi
+  else
+    echo '-bash: deploy: No repository ""available'
+    return 1
   fi
 }
