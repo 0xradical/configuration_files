@@ -7,7 +7,9 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
-
+alias firefox='open -a Firefox'
+alias safari='open -a Safari'
+alias flushdns='dscacheutil -flushcache'
 
 # bash colors
 
