@@ -96,3 +96,17 @@ function deploy {
     return 1
   fi
 }
+
+function mate {
+  mate_executable=`which mate`
+  if [ -n "$mate_executable" ]; then
+    if [ $# -gt 0 ]; then
+      $mate_executable $@
+    else
+      $mate_executable .
+    fi
+  else
+    echo '-bash: mate: command not found'
+    return 1
+  fi
+}
