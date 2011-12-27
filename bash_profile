@@ -86,7 +86,11 @@ function deploy {
     if [ -n "$ey_executable" ]; then
       current_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
       current_app=$(basename $(pwd))
-      ey deploy --app="$current_app" --ref="$current_branch"
+      if [ "$1" == "-m" ]; then
+        ey deploy --app="$current_app" --ref="$current_branch" --migrate
+      else
+        ey deploy --app="$current_app" --ref="$current_branch"
+      fi
     else
       echo '-bash: deploy: Gem "engineyard" is not installed'
       return 1
