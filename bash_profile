@@ -58,11 +58,12 @@ function rails {
   if [ -e Gemfile ]; then
     bundle exec rails $@
   else
-    rails_executable=`which rails`
+    rails_executable=$(which rails)
     if [ -n "$rails_executable" ]; then
       $rails_executable $@
     else
       echo "-bash: rails: command not found"
+      return 1
     fi
   fi
 }
@@ -71,18 +72,19 @@ function rake {
   if [ -e Gemfile ]; then
     bundle exec rake $@
   else
-    rake_executable=`which rake`
+    rake_executable=$(which rake)
     if [ -n "$rake_executable" ]; then
       $rake_executable $@
     else
       echo "-bash: rake: command not found"
+      return 1
     fi
   fi
 }
 
 function deploy {
   if [ -e .git/config ]; then
-    ey_executable=`which ey`
+    ey_executable=$(which ey)
     if [ -n "$ey_executable" ]; then
       current_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
       current_app=$(basename $(pwd))
@@ -102,7 +104,7 @@ function deploy {
 }
 
 function mate {
-  mate_executable=`which mate`
+  mate_executable=$(which mate)
   if [ -n "$mate_executable" ]; then
     if [ $# -gt 0 ]; then
       $mate_executable $@
