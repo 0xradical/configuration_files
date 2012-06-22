@@ -116,3 +116,12 @@ function mate {
     return 1
   fi
 }
+
+function utf8 {
+  if [ $# -gt 0 ]; then
+    iconv -f ISO-8859-1 -t UTF-8 "$@" > "new_$@"
+  else
+    echo 'Usage: utf8 [file]'
+    return 1
+  fi
+}
