@@ -10,6 +10,7 @@ alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/C
 alias firefox='open -a Firefox'
 alias safari='open -a Safari'
 alias flushdns='dscacheutil -flushcache'
+alias sub='sublime'
 
 # bash colors
 
@@ -45,7 +46,7 @@ export HISTIGNORE="&:cl:x" # ignore specific commands
 
 
 # generic stuff
-export EDITOR=mate
+export EDITOR=sublime
 export PERL_UNICODE=AS #This makes all Perl scripts decode @ARGV as UTF‑8 strings, and sets the encoding of all three of stdin, stdout, and stderr to UTF‑8. Both these are global effects, not lexical ones.
 unset MAILCHECK #do not check for mails in bash
 
@@ -112,6 +113,20 @@ function mate {
     fi
   else
     echo '-bash: mate: command not found'
+    return 1
+  fi
+}
+
+function sublime {
+  sublime_executable=$(which sublime)
+  if [ -n "$sublime_executable" ]; then
+    if [ $# -gt 0 ]; then
+      $sublime_executable $@
+    else
+      $sublime_executable .
+    fi
+  else
+    echo '-bash: sublime: command not found'
     return 1
   fi
 }
