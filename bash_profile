@@ -1,4 +1,4 @@
-# aliases
+## aliases
 alias ..='cd ..'
 alias ...='cd ../..'
 alias la='ls -la'
@@ -10,45 +10,57 @@ alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/C
 alias firefox='open -a Firefox'
 alias safari='open -a Safari'
 alias flushdns='dscacheutil -flushcache'
-alias sub='sublime'
 
-# bash colors
-
+## bash colors
 export CLICOLOR=1
 export LSCOLORS=ExGxxxxxbxxxxxxxxxxxxx
 
-# prompt color
-
-export PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] "
-
-# git stuff
-
-if [[ -s "$HOME/.git-completion.bash" ]]; then
-    source "$HOME/.git-completion.bash"
+## git stuff
+# Shows git information on the prompt
+if [[ -s '/usr/local/etc/bash_completion.d/git-prompt.sh' ]]; then
+  source '/usr/local/etc/bash_completion.d/git-prompt.sh'
 fi
 
-# rvm stuff
+# Adds completion for git functions
+if [[ -s '/usr/local/etc/bash_completion.d/git-completion.bash' ]]; then
+  source '/usr/local/etc/bash_completion.d/git-completion.bash'
+fi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+## prompt format
+export PS1='\[\033[01;32m\]\u@\h$(__git_ps1 " (%s)")\[\033[01;34m\] \w \$\[\033[00m\] '
 
-# mysql stuff
-
+## mysql stuff
 export PATH=/usr/local/mysql/bin:$PATH
 export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:/usr/local/mysql/lib/"
 export MYSQL_HISTFILE=/dev/null
 
-# history stuff
+## custom path
+export PATH=~/bin:$PATH
+
+## rvm stuff
+# This loads RVM into a shell session
+if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+  source "$HOME/.rvm/scripts/rvm"
+fi
+
+## history stuff
 export HISTSIZE=1000
-export HISTTIMEFORMAT="| %d/%m/%Y %T | " # 319  | 2010-06-02 09:02PM | reload
-export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND" # Save and reload the history after each command finishes
-export HISTCONTROL=erasedups # ignore repeat commands
-export HISTIGNORE="&:cl:x" # ignore specific commands
+export HISTTIMEFORMAT="| %d/%m/%Y %T | "
+export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
+export HISTCONTROL=erasedups
+export HISTIGNORE="&:cl:x"
 
-
-# generic stuff
+## generic stuff
+# Editor that opens when asked for input
 export EDITOR=sublime
-export PERL_UNICODE=AS #This makes all Perl scripts decode @ARGV as UTF‑8 strings, and sets the encoding of all three of stdin, stdout, and stderr to UTF‑8. Both these are global effects, not lexical ones.
-unset MAILCHECK #do not check for mails in bash
+
+# This makes all Perl scripts decode @ARGV as UTF‑8 strings,
+# and sets the encoding of all three of stdin, stdout, and
+# stderr to UTF‑8. Both these are global effects, not lexical ones.
+export PERL_UNICODE=AS
+
+# do not check for mails in bash
+unset MAILCHECK
 
 function reload {
   source "$HOME/.bash_profile"
@@ -58,9 +70,8 @@ function rails {
   if [ -e Gemfile ]; then
     bundle exec rails $@
   else
-    rails_executable=$(which rails)
-    if [ -n "$rails_executable" ]; then
-      $rails_executable $@
+    if [ -n $(which rails) ]; then
+      $(which rails) $@
     else
       echo "-bash: rails: command not found"
       return 1
@@ -72,9 +83,8 @@ function rake {
   if [ -e Gemfile ]; then
     bundle exec rake $@
   else
-    rake_executable=$(which rake)
-    if [ -n "$rake_executable" ]; then
-      $rake_executable $@
+    if [ -n $(which rake) ]; then
+      $(which rake) $@
     else
       echo "-bash: rake: command not found"
       return 1
@@ -82,60 +92,15 @@ function rake {
   fi
 }
 
-function deploy {
-  if [ -e .git/config ]; then
-    ey_executable=$(which ey)
-    if [ -n "$ey_executable" ]; then
-      current_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-      current_app=$(basename $(pwd))
-      if [ "$1" == "-m" ]; then
-        ey deploy --app="$current_app" --ref="$current_branch" --migrate
-      else
-        ey deploy --app="$current_app" --ref="$current_branch"
-      fi
-    else
-      echo '-bash: deploy: Gem "engineyard" is not installed'
-      return 1
-    fi
-  else
-    echo '-bash: deploy: No repository available'
-    return 1
-  fi
-}
-
-function mate {
-  mate_executable=$(which mate)
-  if [ -n "$mate_executable" ]; then
-    if [ $# -gt 0 ]; then
-      $mate_executable $@
-    else
-      $mate_executable .
-    fi
-  else
-    echo '-bash: mate: command not found'
-    return 1
-  fi
-}
-
 function sublime {
-  sublime_executable=$(which sublime)
-  if [ -n "$sublime_executable" ]; then
+  if [ -n $(which sublime) ]; then
     if [ $# -gt 0 ]; then
-      $sublime_executable $@
+      $(which sublime) --new-window $@
     else
-      $sublime_executable .
+      $(which sublime) --new-window .
     fi
   else
     echo '-bash: sublime: command not found'
-    return 1
-  fi
-}
-
-function utf8 {
-  if [ $# -gt 0 ]; then
-    iconv -f ISO-8859-1 -t UTF-8 "$@" > "new_$@"
-  else
-    echo 'Usage: utf8 [file]'
     return 1
   fi
 }
