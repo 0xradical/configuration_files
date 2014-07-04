@@ -66,32 +66,6 @@ function reload {
   source "$HOME/.bash_profile"
 }
 
-function rails {
-  if [ -e Gemfile ]; then
-    bundle exec rails $@
-  else
-    if [ -n $(which rails) ]; then
-      $(which rails) $@
-    else
-      echo "-bash: rails: command not found"
-      return 1
-    fi
-  fi
-}
-
-function rake {
-  if [ -e Gemfile ]; then
-    bundle exec rake $@
-  else
-    if [ -n $(which rake) ]; then
-      $(which rake) $@
-    else
-      echo "-bash: rake: command not found"
-      return 1
-    fi
-  fi
-}
-
 function sublime {
   if [ -n $(which sublime) ]; then
     if [ $# -gt 0 ]; then

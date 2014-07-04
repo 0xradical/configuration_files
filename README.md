@@ -1,1 +1,1 @@
-      Some configuration files I use on my Mac
+Some configuration files I use on my Mac
