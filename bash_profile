@@ -33,15 +33,30 @@ export PS1='\[\033[01;32m\]\u@\h$(__git_ps1 " (%s)")\[\033[01;34m\] \w \$\[\033[
 export PATH=/usr/local/mysql/bin:$PATH
 export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:/usr/local/mysql/lib/"
 export MYSQL_HISTFILE=/dev/null
+export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig:$PKG_CONFIG_PATH
 
 ## custom path
 export PATH=~/bin:$PATH
+
+## homebrew
+export PATH=/usr/local/bin:$PATH
+
+## go
+export GOPATH=$HOME/projects/go
+export PATH=$PATH:$GOPATH/bin
+
+# goroot based install
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 ## rvm stuff
 # This loads RVM into a shell session
 if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
   source "$HOME/.rvm/scripts/rvm"
 fi
+
+export -a chpwd_functions                              # define hooks as an shell array
+[[ " ${chpwd_functions[*]} " == *" _hook_name "* ]] || # prevent double addition
+chpwd_functions+=(_hook_name)                          # finally add it to the list
 
 ## history stuff
 export HISTSIZE=1000
@@ -76,5 +91,14 @@ function sublime {
   else
     echo '-bash: sublime: command not found'
     return 1
+  fi
+}
+
+function gitchangelog {
+  if [ $# -lt 1 ]; then
+    echo 'Usage: gitchangelog [ref]'
+    return 1
+  else
+    git log  $1..HEAD --oneline --decorate
   fi
 }
