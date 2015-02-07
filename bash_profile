@@ -1,3 +1,9 @@
+if [ -z ${RC_LOADED+x} ]; then
+  :
+else
+  return;
+fi
+
 ## aliases
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -54,14 +60,12 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
   source "$HOME/.rvm/scripts/rvm"
 fi
 
-export -a chpwd_functions                              # define hooks as an shell array
-[[ " ${chpwd_functions[*]} " == *" _hook_name "* ]] || # prevent double addition
-chpwd_functions+=(_hook_name)                          # finally add it to the list
-
 ## history stuff
 export HISTSIZE=1000
 export HISTTIMEFORMAT="| %d/%m/%Y %T | "
-export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
+if [ -z ${PROMPT_COMMAND+x} ]; then
+  export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
+fi
 export HISTCONTROL=erasedups
 export HISTIGNORE="&:cl:x"
 
