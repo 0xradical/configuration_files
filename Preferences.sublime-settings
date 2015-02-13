@@ -1,0 +1,22 @@
+{
+  "color_scheme": "Packages/Color Scheme - Default/GitHub.tmTheme",
+  "font_face": "Courier",
+  "font_size": 21.0,
+  "ignored_packages":
+  [
+    "Vintage",
+    "TidyHTML5"
+  ],
+  "tab_size": 2,
+  "translate_tabs_to_spaces": true,
+  "trim_trailing_white_space_on_save": true,
+  "filename_syntax_settings":
+  [
+
+    // Possible values:
+    // cd /Users/thiago/Library/Application\ Support/Sublime\ Text\ 2/Packages && ls **/*.tmLanguage | cut -d '/' -f 2 | cut -d '.' -f 1
+
+    ["Vagrantfile.*", "Ruby", "s"],
+    ["\\.docker", "Shell-Unix-Generic", "s"]
+  ]
+}

@@ -45,7 +45,7 @@ export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig:$PKG_CONFIG_PATH
 export PATH=~/bin:$PATH
 
 ## homebrew
-export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 ## go
 export GOPATH=$HOME/projects/go
@@ -118,4 +118,9 @@ function pg_restore_without_bullshit {
 
 function dirsize {
   find . -maxdepth 1 -type d -mindepth 0 -exec du -hs {} \; | gsort -hr
+}
+
+# remove docker containers
+function rmconts {
+  docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs docker rm
 }
