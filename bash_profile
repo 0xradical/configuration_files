@@ -124,3 +124,26 @@ function dirsize {
 function rmconts {
   docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs docker rm
 }
+
+# https://coderwall.com/p/tsfiya/rails-alias_method_chain-for-bash
+function decorate {
+  local base=$1
+  local feature=$2
+  local undecorated="${base}_without_${feature}"
+  local decorated="${base}_with_${feature}"
+
+  # Define $undecorated with $base's body
+  eval "$(echo 'function' ${undecorated}; declare -f $base | tail -n +2)"
+
+  # Define $base with $decorated's body
+  eval "$(echo 'function' ${base}; declare -f $decorated | tail -n +2)"
+}
+
+function cd_with_docker {
+  cd_without_docker "$@"
+  case $PWD in
+    /Users/thiago/projects/querobolsa) . ./.docker;;
+  esac
+}
+
+decorate cd docker
