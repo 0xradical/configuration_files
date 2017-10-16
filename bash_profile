@@ -54,6 +54,9 @@ export PATH=$PATH:$GOPATH/bin
 # goroot based install
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
+# homebrew postgres
+export PATH=/usr/local/opt/postgresql@9.4/bin:$PATH
+
 ## rvm stuff
 # This loads RVM into a shell session
 if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
@@ -61,6 +64,7 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
 fi
 
 ## history stuff
+shopt -s histappend
 export HISTSIZE=1000
 export HISTTIMEFORMAT="| %d/%m/%Y %T | "
 if [ -z ${PROMPT_COMMAND+x} ]; then
@@ -139,11 +143,21 @@ function decorate {
   eval "$(echo 'function' ${base}; declare -f $decorated | tail -n +2)"
 }
 
-function cd_with_docker {
-  cd_without_docker "$@"
-  case $PWD in
-    /Users/thiago/projects/querobolsa) . ./.docker;;
-  esac
-}
+# function cd_with_docker {
+#   cd_without_docker "$@"
+#   case $PWD in
+#     /Users/thiago/projects/querobolsa) . ./.docker;;
+#   esac
+# }
 
-decorate cd docker
+# decorate cd docker
+
+# BEGIN Ruboto setup
+source ~/.rubotorc
+# END Ruboto setup
+
+source ~/.homebrew_token
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash
