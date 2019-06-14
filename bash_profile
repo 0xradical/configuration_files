@@ -75,7 +75,7 @@ export HISTIGNORE="&:cl:x"
 
 ## generic stuff
 # Editor that opens when asked for input
-export EDITOR=sublime
+export EDITOR=code
 
 # This makes all Perl scripts decode @ARGV as UTF‑8 strings,
 # and sets the encoding of all three of stdin, stdout, and
@@ -87,19 +87,6 @@ unset MAILCHECK
 
 function reload {
   source "$HOME/.bash_profile"
-}
-
-function sublime {
-  if [ -n $(which sublime) ]; then
-    if [ $# -gt 0 ]; then
-      $(which sublime) --new-window $@
-    else
-      $(which sublime) --new-window .
-    fi
-  else
-    echo '-bash: sublime: command not found'
-    return 1
-  fi
 }
 
 function gitchangelog {
