@@ -1,9 +1,3 @@
-if [ -z ${RC_LOADED+x} ]; then
-  :
-else
-  return;
-fi
-
 ## aliases
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -51,11 +45,28 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export GOPATH=$HOME/projects/go
 export PATH=$PATH:$GOPATH/bin
 
+## python
+export PATH=$PATH:$HOME/Library/Python/2.7/bin/
+
 # goroot based install
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 # homebrew postgres
 export PATH=/usr/local/opt/postgresql@9.4/bin:$PATH
+
+# yarn
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# rvm
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# haskell
+[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
 ## rvm stuff
 # This loads RVM into a shell session
@@ -148,3 +159,5 @@ source ~/.homebrew_token
 . $HOME/.asdf/asdf.sh
 
 . $HOME/.asdf/completions/asdf.bash
+
+export ERL_AFLAGS="-kernel shell_history enabled"
