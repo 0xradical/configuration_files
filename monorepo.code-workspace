@@ -43,6 +43,8 @@
       "web-app/database/": true
     },
     "html-css-class-completion.includeGlobPattern": "build/dist/{bundle,atomic.full}.css",
-    "html-css-class-completion.enableEmmetSupport": true
+    "html-css-class-completion.enableEmmetSupport": true,
+    "prettier.resolveGlobalModules": true,
+    "prettier.prettierPath": "/Users/thiago/.nvm/versions/node/v12.17.0/lib/node_modules/prettier"
   }
 }
