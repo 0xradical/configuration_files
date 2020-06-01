@@ -1,0 +1,48 @@
+{
+  "folders": [
+    {
+      "path": "web-app/user-dashboard",
+      "name": "user"
+    },
+    {
+      "path": "web-app/developers-dashboard",
+      "name": "developers"
+    },
+    {
+      "path": "web-app/web-app",
+      "name": "classpert"
+    },
+    {
+      "path": "web-app/i18n",
+      "name": "i18n"
+    },
+    {
+      "path": "web-app/components",
+      "name": "components"
+    },
+    {
+      "path": "web-app/database",
+      "name": "database"
+    },
+    {
+      "path": "elements",
+      "name": "elements"
+    },
+    {
+      "name": ".workspace",
+      "path": "web-app"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "web-app/user-dashboard/": true,
+      "web-app/developers-dashboard/": true,
+      "web-app/web-app/": true,
+      "web-app/i18n/": true,
+      "web-app/components/": true,
+      "web-app/database/": true
+    },
+    "html-css-class-completion.includeGlobPattern": "build/dist/{bundle,atomic.full}.css",
+    "html-css-class-completion.enableEmmetSupport": true
+  }
+}
