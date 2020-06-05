@@ -27,7 +27,7 @@ if [[ -s '/usr/local/etc/bash_completion.d/git-completion.bash' ]]; then
 fi
 
 ## prompt format
-export PS1='\[\033[01;32m\]\u@\h$(__git_ps1 " (%s)")\[\033[01;34m\] \w \$\[\033[00m\] '
+export PS1='\[\033[01;32m\]\u@\h$(__git_ps1 " (%s)")\[\033[01;34m\] \W \$\[\033[00m\] '
 
 ## mysql stuff
 export PATH=/usr/local/mysql/bin:$PATH
